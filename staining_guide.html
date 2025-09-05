@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Guide to Staining Maple Chairs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F5F2;
+            color: #3C2A21;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        .checklist-item {
+            transition: all 0.3s ease;
+        }
+        .checklist-item.completed {
+            text-decoration: line-through;
+            color: #A87B5A;
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-in-out;
+        }
+        .flow-step {
+            text-align: center;
+            flex: 1;
+        }
+        .flow-arrow {
+            flex-shrink: 0;
+            line-height: 50px;
+            font-size: 2rem;
+            color: #A87B5A;
+        }
+        .button-style {
+            background-color: #A87B5A;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+        .button-style:hover {
+            background-color: #8C6A4F;
+            transform: translateY(-2px);
+        }
+        .button-style:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+
+        <header class="text-center my-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#3C2A21] mb-4">A Beginner's Guide to Staining Maple Chairs 🎨</h1>
+            <p class="max-w-3xl mx-auto text-lg text-[#5a4e46]">Welcome to your interactive guide! Staining an unfinished maple chair is a rewarding project. Because maple is a dense hardwood, following these steps carefully will help you achieve a beautiful, professional-quality finish.</p>
+        </header>
+
+        <section id="materials" class="mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-center text-[#3C2A21] mb-2">Materials Checklist</h2>
+                <p class="text-center text-gray-600 mb-6">Before you begin, gather all the necessary supplies. Check off each item as you collect it to track your progress.</p>
+                
+                <div class="w-full bg-[#E8D5C4] rounded-full h-4 mb-6">
+                    <div id="progressBar" class="bg-[#A87B5A] h-4 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-lg" id="checklist">
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>120-Grit Sandpaper</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>220-Grit Sandpaper</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Tack Cloth</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Pre-Stain Conditioner</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Wood Stain</span>
+                    </label>
+                    <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Clean Rags</span>
+                    </label>
+                     <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Polyurethane Topcoat</span>
+                    </label>
+                     <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>Brushes</span>
+                    </label>
+                     <label class="flex items-center p-3 bg-[#F7F5F2] rounded-lg cursor-pointer hover:bg-[#E8D5C4] checklist-item">
+                        <input type="checkbox" class="h-5 w-5 rounded border-gray-300 text-[#A87B5A] focus:ring-[#A87B5A] mr-3">
+                        <span>400-Grit Sandpaper</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="step1" class="space-y-8">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-[#A87B5A] mb-4">Step 1: Prepare the Wood</h2>
+                <p class="text-gray-600 mb-4">Proper preparation is the most important part of this project! Don't skip these steps, as they prevent blotchy or uneven staining and ensure a professional result.</p>
+                <button class="button-style text-sm" onclick="playAudio('step1')">Listen to this step ✨</button>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Sand Thoroughly & Clean</h3>
+                        <p id="step1-text1" class="text-gray-600 mb-4">Start with 120-grit sandpaper to smooth rough spots, then use 220-grit for a fine finish. Always sand in the direction of the wood grain. When finished, wipe away all dust with a tack cloth.</p>
+                        <div class="chart-container">
+                            <canvas id="sandingChart"></canvas>
+                        </div>
+                        <p class="text-center text-sm text-gray-500 mt-2">This chart shows the relative coarseness of the sandpaper. Lower grit numbers are more abrasive.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Apply Wood Conditioner</h3>
+                        <p id="step1-text2" class="text-gray-600">This is the secret to staining maple! Apply a pre-stain wood conditioner according to the manufacturer's directions. This product helps the dense maple wood absorb the stain evenly. Let it sit for the recommended time, usually about 15-30 minutes, before moving on.</p>
+                        <div class="mt-6 bg-[#F7F5F2] p-4 rounded-lg text-center">
+                            <p class="text-6xl">💡</p>
+                            <p class="font-semibold text-[#3C2A21] mt-2">Pro Tip: Don't Skip This!</p>
+                            <p class="text-gray-600 text-sm">Conditioner is essential for dense woods like maple to avoid a patchy finish.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-[#A87B5A] mb-4">Step 2: Apply the Stain</h2>
+                <p class="text-gray-600 mb-4">Now for the fun part! Applying the stain is where you get to see the color of your chair come to life. Work in a well-ventilated area and protect your workspace from spills.</p>
+                <button class="button-style text-sm" onclick="playAudio('step2')">Listen to this step ✨</button>
+                 <div id="step2-text" class="bg-[#F7F5F2] p-6 rounded-lg mt-4">
+                    <h3 class="text-xl font-semibold text-center mb-4">The Staining Process</h3>
+                    <div class="flex items-center justify-center">
+                        <div class="flow-step">
+                            <div class="text-4xl">🖌️</div>
+                            <p class="font-bold mt-2">1. Apply</p>
+                            <p class="text-sm text-gray-600">Use a rag or brush to apply a liberal coat of stain, moving with the grain.</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="text-4xl">⏱️</div>
+                            <p class="font-bold mt-2">2. Wait</p>
+                            <p class="text-sm text-gray-600">Let the stain penetrate the wood for 2-5 minutes as per product instructions.</p>
+                        </div>
+                        <div class="flow-arrow">→</div>
+                        <div class="flow-step">
+                            <div class="text-4xl">닦</div>
+                            <p class="font-bold mt-2">3. Wipe</p>
+                            <p class="text-sm text-gray-600">Use a clean, dry rag to wipe off all excess stain from the surface.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 mt-6">Let the first coat dry completely, which can take a few hours to a full day. If you want a deeper, richer color, you can apply a second coat, repeating the process above.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-[#A87B5A] mb-4">Step 3: Add a Protective Finish</h2>
+                <p class="text-gray-600 mb-4">Once the stain is completely dry, you'll want to protect the chair from spills and wear. A polyurethane topcoat is the most common and durable choice.</p>
+                 <button class="button-style text-sm" onclick="playAudio('step3')">Listen to this step ✨</button>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Apply Thin Coats & Sand</h3>
+                        <p id="step3-text1" class="text-gray-600">Using a clean brush, apply a very thin, even coat of polyurethane. Let it dry completely. For a super-smooth finish, lightly sand the chair with a very fine-grit (400-grit) sandpaper between coats to remove any imperfections. Wipe it down with a tack cloth before applying the next coat. Apply 2-3 coats total for best results.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Choose Your Sheen</h3>
+                        <p id="step3-text2" class="text-gray-600 mb-4">The final sheen affects the look and feel of your chair. Here's a quick visual guide:</p>
+                        <div class="space-y-3">
+                            <div class="p-4 rounded-lg bg-[#E8D5C4]">
+                                <p class="font-bold">Matte</p>
+                                <p class="text-sm">No shine, for a natural, modern look.</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-[#E8D5C4] shadow-inner">
+                                <p class="font-bold">Satin</p>
+                                <p class="text-sm">A low-level, subtle shine. Very popular and forgiving.</p>
+                            </div>
+                            <div class="p-4 rounded-lg bg-[#E8D5C4] shadow-lg" style="background-image: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0));">
+                                <p class="font-bold">Gloss</p>
+                                <p class="text-sm">High shine and very reflective. Makes a statement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-[#A87B5A] mb-4">Need help? Ask our Troubleshooting Assistant ✨</h2>
+                <p class="text-gray-600 mb-4">Describe the problem you are facing with your staining project and our AI assistant will provide guidance to help you get back on track.</p>
+                <textarea id="troubleInput" class="w-full h-32 p-4 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-[#A87B5A]" placeholder="e.g., 'My stain is looking blotchy and uneven. What should I do?'"></textarea>
+                <div class="flex justify-center mt-4">
+                    <button id="troubleButton" class="button-style flex items-center justify-center">
+                        <span>Get Solution</span>
+                        <div id="troubleSpinner" class="hidden ml-2 h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
+                    </button>
+                </div>
+                <div id="troubleOutput" class="mt-6 p-4 bg-[#F7F5F2] rounded-lg">
+                    <p class="text-gray-500 text-center">Your solution will appear here.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-[#A87B5A] mb-4">Find Your Perfect Color ✨</h2>
+                <p class="text-gray-600 mb-4">Upload a picture of the room where the chairs will go. Our AI interior designer will suggest stain colors that complement your decor.</p>
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="w-full max-w-sm">
+                        <img id="roomImage" class="w-full h-auto rounded-lg shadow-inner border border-gray-200 object-cover" src="https://placehold.co/400x300/e0e0e0/5a4e46?text=Upload+Your+Image" alt="Placeholder image for room">
+                    </div>
+                    <label for="imageInput" class="button-style cursor-pointer px-6 py-2">
+                        Upload Photo
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    </label>
+                    <button id="colorButton" class="button-style flex items-center justify-center">
+                        <span>Suggest Colors</span>
+                        <div id="colorSpinner" class="hidden ml-2 h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
+                    </button>
+                </div>
+                <div id="colorOutput" class="mt-6 p-4 bg-[#F7F5F2] rounded-lg">
+                    <p class="text-gray-500 text-center">Suggested colors will appear here after you upload a photo and click the button.</p>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <script>
+        const apiKey = "";
+        
+        let isPlaying = false;
+        let audioContext;
+        let audioSource;
+        let currentAudio;
+        let currentSpinner = null;
+
+        const pcmToWav = (pcmData, sampleRate) => {
+            const numChannels = 1;
+            const bytesPerSample = 2;
+            const blockAlign = numChannels * bytesPerSample;
+            const byteRate = sampleRate * blockAlign;
+
+            const buffer = new ArrayBuffer(44 + pcmData.length * bytesPerSample);
+            const view = new DataView(buffer);
+            let offset = 0;
+
+            const writeString = (str) => {
+                for (let i = 0; i < str.length; i++) {
+                    view.setUint8(offset + i, str.charCodeAt(i));
+                }
+                offset += str.length;
+            };
+
+            writeString('RIFF');
+            view.setUint32(offset, 36 + pcmData.length * bytesPerSample, true); offset += 4;
+            writeString('WAVE');
+            writeString('fmt ');
+            view.setUint32(offset, 16, true); offset += 4;
+            view.setUint16(offset, 1, true); offset += 2;
+            view.setUint16(offset, numChannels, true); offset += 2;
+            view.setUint32(offset, sampleRate, true); offset += 4;
+            view.setUint32(offset, byteRate, true); offset += 4;
+            view.setUint16(offset, blockAlign, true); offset += 2;
+            view.setUint16(offset, bytesPerSample * 8, true); offset += 2;
+            writeString('data');
+            view.setUint32(offset, pcmData.length * bytesPerSample, true); offset += 4;
+
+            pcmData.forEach(sample => {
+                view.setInt16(offset, sample, true);
+                offset += bytesPerSample;
+            });
+
+            return new Blob([view], { type: 'audio/wav' });
+        };
+
+        const base64ToArrayBuffer = (base64) => {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8-bit-integer-unsigned-array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        };
+
+        const playAudio = async (stepId) => {
+            const button = document.querySelector(`[onclick="playAudio('${stepId}')"]`);
+            const spinner = button.querySelector('#troubleSpinner');
+            const textContent = document.getElementById(stepId).innerText;
+
+            if (isPlaying && currentAudio && currentAudio === button) {
+                currentAudio.pause();
+                isPlaying = false;
+                currentAudio = null;
+                button.innerHTML = 'Listen to this step ✨';
+                return;
+            }
+
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.innerHTML = 'Listen to this step ✨';
+            }
+
+            button.innerHTML = `<div id="troubleSpinner" class="h-4 w-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>`;
+            currentSpinner = button.querySelector('#troubleSpinner');
+            isPlaying = true;
+
+            const payload = {
+                contents: [{ parts: [{ text: textContent }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: { prebuiltVoiceConfig: { voiceName: "Puck" } }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            let audioUrl;
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (!audioData || !mimeType || !mimeType.startsWith("audio/")) {
+                    throw new Error('Invalid audio data received');
+                }
+
+                const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000;
+                const pcmData = base64ToArrayBuffer(audioData);
+                const pcm16 = new Int16-bit-integer-signed-array(pcmData);
+                const wavBlob = pcmToWav(pcm16, sampleRate);
+                audioUrl = URL.createObjectURL(wavBlob);
+                
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                audioSource = audioContext.createBufferSource();
+                const audioBuffer = await audioContext.decodeAudioData(pcmData);
+                audioSource.buffer = audioBuffer;
+                audioSource.connect(audioContext.destination);
+                audioSource.start();
+
+                audioSource.onended = () => {
+                    isPlaying = false;
+                    currentAudio = null;
+                    button.innerHTML = 'Listen to this step ✨';
+                };
+                
+                currentAudio = audioSource;
+                button.innerHTML = 'Stop listening';
+
+            } catch (e) {
+                console.error('Error with TTS playback:', e);
+                button.innerHTML = 'Error';
+                isPlaying = false;
+                currentAudio = null;
+            } finally {
+                if (currentSpinner) {
+                    currentSpinner.style.display = 'none';
+                }
+            }
+        };
+
+        const getTroubleshootingAdvice = async () => {
+            const inputElement = document.getElementById('troubleInput');
+            const outputElement = document.getElementById('troubleOutput');
+            const button = document.getElementById('troubleButton');
+            const spinner = document.getElementById('troubleSpinner');
+            
+            const userQuery = inputElement.value;
+            if (!userQuery) {
+                outputElement.innerHTML = `<p class="text-red-500">Please describe your problem first.</p>`;
+                return;
+            }
+
+            button.disabled = true;
+            spinner.classList.remove('hidden');
+            outputElement.innerHTML = `<p class="text-gray-500 text-center">Thinking...</p>`;
+
+            const systemPrompt = "You are a friendly and knowledgeable woodworking expert. Provide a concise, step-by-step solution to the user's wood staining problem. Keep the advice practical and encouraging.";
+            const fullPrompt = `The user is staining a maple chair. They have described a problem: "${userQuery}". Based on common woodworking issues with maple, provide a solution.`;
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: fullPrompt }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        tools: [{ "google_search": {} }]
+                    })
+                });
+
+                const result = await response.json();
+                const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (text) {
+                    outputElement.innerHTML = `<p class="text-gray-800">${text}</p>`;
+                } else {
+                    outputElement.innerHTML = `<p class="text-red-500 text-center">Sorry, I couldn't generate a solution. Please try again.</p>`;
+                }
+            } catch (e) {
+                console.error("Error calling Gemini API:", e);
+                outputElement.innerHTML = `<p class="text-red-500 text-center">There was an error connecting to the assistant. Please check your network and try again.</p>`;
+            } finally {
+                button.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        };
+        
+        const getColorSuggestions = async () => {
+            const imageInput = document.getElementById('imageInput');
+            const colorButton = document.getElementById('colorButton');
+            const colorSpinner = document.getElementById('colorSpinner');
+            const colorOutput = document.getElementById('colorOutput');
+            const file = imageInput.files[0];
+
+            if (!file) {
+                colorOutput.innerHTML = `<p class="text-red-500">Please upload an image first.</p>`;
+                return;
+            }
+
+            colorButton.disabled = true;
+            colorSpinner.classList.remove('hidden');
+            colorOutput.innerHTML = `<p class="text-gray-500 text-center">Analyzing your room and suggesting colors...</p>`;
+
+            const reader = new FileReader();
+            reader.onload = async () => {
+                const base64Data = reader.result.split(',')[1];
+                const prompt = "You are an AI interior designer. Analyze the provided image of a room and suggest 3 to 4 wood stain colors for a maple chair that would complement the existing decor and furniture. Briefly explain why each suggestion works. Focus on common wood stain colors like ebony, dark walnut, early American, or golden oak. Do not suggest a paint color, only stain.";
+                
+                try {
+                    const payload = {
+                        contents: [
+                            {
+                                role: "user",
+                                parts: [
+                                    { text: prompt },
+                                    {
+                                        inlineData: {
+                                            mimeType: file.type,
+                                            data: base64Data
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+                    
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+                    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                    
+                    if (text) {
+                        colorOutput.innerHTML = `<p class="text-gray-800">${text.replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                        colorOutput.innerHTML = `<p class="text-red-500 text-center">Sorry, I couldn't generate suggestions. Please try another image.</p>`;
+                    }
+                } catch (e) {
+                    console.error("Error calling Gemini API:", e);
+                    colorOutput.innerHTML = `<p class="text-red-500 text-center">There was an error connecting to the assistant. Please check your network and try again.</p>`;
+                } finally {
+                    colorButton.disabled = false;
+                    colorSpinner.classList.add('hidden');
+                }
+            };
+            reader.readAsDataURL(file);
+        };
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const checklist = document.getElementById('checklist');
+            const checkboxes = checklist.querySelectorAll('input[type="checkbox"]');
+            const progressBar = document.getElementById('progressBar');
+            const totalItems = checkboxes.length;
+
+            const updateProgress = () => {
+                const checkedItems = checklist.querySelectorAll('input[type="checkbox"]:checked').length;
+                const percentage = (checkedItems / totalItems) * 100;
+                progressBar.style.width = percentage + '%';
+
+                checkboxes.forEach(box => {
+                    if (box.checked) {
+                        box.parentElement.classList.add('completed');
+                    } else {
+                        box.parentElement.classList.remove('completed');
+                    }
+                });
+            };
+
+            checkboxes.forEach(box => {
+                box.addEventListener('change', updateProgress);
+            });
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+
+            const sandingCtx = document.getElementById('sandingChart').getContext('2d');
+            new Chart(sandingCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Smoothing (120-Grit)', 'Fine Finish (220-Grit)', 'Between Coats (400-Grit)'],
+                    datasets: [{
+                        label: 'Coarseness Level',
+                        data: [120, 220, 400],
+                        backgroundColor: ['#A87B5A', '#b79171', '#c5a688'],
+                        borderColor: '#3C2A21',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Grit Number (Higher is Finer)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('troubleButton').addEventListener('click', getTroubleshootingAdvice);
+            document.getElementById('imageInput').addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        document.getElementById('roomImage').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            document.getElementById('colorButton').addEventListener('click', getColorSuggestions);
+        });
+    </script>
+
+</body>
+</html>
